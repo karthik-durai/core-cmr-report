@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
 import xml.etree.ElementTree as ET
 from xml_parser import get_data
+from django.views.decorators.csrf import csrf_exempt
 
 
 UPLOAD_DIR = 'uploads'
@@ -16,6 +17,7 @@ def index(request):
 def upload_page(request):
     return render(request, 'upload.html')
 
+@csrf_exempt  # Disable CSRF for simplicity
 def upload_xml(request):
     if request.method == 'POST' and request.FILES.get('xml_file'):
         xml_file = request.FILES['xml_file']
