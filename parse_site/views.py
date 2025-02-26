@@ -34,6 +34,8 @@ def upload_xml(request):
         except ET.ParseError:
             return JsonResponse({'error': 'Invalid XML format'}, status=400)
         
+        fs.delete(filename)
+        
         return HttpResponse(data)
     
     return JsonResponse({'error': 'Invalid request'}, status=400)
